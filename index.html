@@ -4,72 +4,232 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduPulse | Global & Tech News for Students</title>
+    <title>EduPulse | Premium Global & Tech News for Students</title>
+    <meta name="description" content="Stay updated with EduPulse, the premium, interactive student portal for global news, tech innovations, study resources, and academic grants.">
+    <!-- Google Fonts: Plus Jakarta Sans for ultra-modern look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="app.js" defer></script>
 </head>
 
-<body>
+<body class="dark-theme">
 
     <header>
-        <div class="logo">EduPulse</div>
+        <div class="logo-area">
+            <span class="logo-icon">⚡</span>
+            <div class="logo" id="main-logo">EduPulse</div>
+        </div>
         <nav>
             <ul>
-                <li><a href="#world" class="active">World News</a></li>
-                <li><a href="#tech">Technology</a></li>
-                <li><a href="#important">Important Alerts</a></li>
-                <li><a href="#resources">Student Hub</a></li>
+                <li><a href="#world" class="nav-link active" id="nav-world">World News</a></li>
+                <li><a href="#tech" class="nav-link" id="nav-tech">Technology</a></li>
+                <li><a href="#resources" class="nav-link" id="nav-resources">Student Hub</a></li>
             </ul>
         </nav>
+        <div class="header-controls">
+            <!-- Theme Toggle -->
+            <div class="theme-selector" id="theme-selector">
+                <button class="theme-btn active" id="btn-dark" title="Deep Space Theme">🌙</button>
+                <button class="theme-btn" id="btn-light" title="Nordic Light Theme">☀️</button>
+                <button class="theme-btn" id="btn-sepia" title="Reading Sepia Theme">📜</button>
+            </div>
+        </div>
     </header>
 
-    <div class="flash-banner" id="important">
-        <span class="badge">IMPORTANT</span>
-        <p>Global Climate Summit announces new student research grants for 2026. <a href="#">Read details &rarr;</a></p>
-    </div>
+    <!-- Personalized Student greeting & marquee -->
+    <section class="welcome-banner" id="welcome-section">
+        <div class="welcome-content">
+            <h1 id="user-greeting">Welcome, Scholar!</h1>
+            <p id="live-date">Loading date & time...</p>
+        </div>
+        <div class="flash-banner" id="important-banner">
+            <span class="badge" id="alert-badge">IMPORTANT</span>
+            <div class="marquee-wrapper">
+                <p class="marquee-text" id="alert-text">Global Climate Summit announces new student research grants for 2026. <a href="#" id="alert-link">Read details &rarr;</a></p>
+            </div>
+        </div>
+    </section>
 
     <main class="container">
 
-        <div class="news-grid">
-
-            <section id="world" class="news-section">
-                <h2>Language & Global Affairs</h2>
-                <hr>
-                <div id="world-news-container">
-                    <p>Loading today's world news...</p>
+        <!-- Left news grid area -->
+        <div class="news-main">
+            <!-- Search & Categories filters -->
+            <div class="news-controls">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="search-input" placeholder="Search topics, headlines or summaries...">
+                    <button class="clear-btn hidden" id="clear-search-btn">&times;</button>
                 </div>
-            </section>
-
-            <section id="tech" class="news-section">
-                <h2>Technology & Innovations</h2>
-                <hr>
-                <div id="tech-news-container">
-                    <p>Loading today's tech breakthroughs...</p>
+                <div class="category-filters" id="category-filters-container">
+                    <button class="filter-tab active" data-category="all" id="tab-all">All News</button>
+                    <button class="filter-tab" data-category="world" id="tab-world">World</button>
+                    <button class="filter-tab" data-category="tech" id="tab-tech">Tech</button>
+                    <button class="filter-tab" data-category="science" id="tab-science">Science</button>
+                    <button class="filter-tab" data-category="edu" id="tab-edu">Education</button>
                 </div>
-            </section>
-
-        </div>
-
-        <aside id="resources" class="sidebar">
-            <div class="sidebar-block">
-                <h3>Quick Student Resources</h3>
-                <ul class="resource-links">
-                    <li><a href="#">&bull; Hackathons & Competitions (2026)</a></li>
-                    <li><a href="#">&bull; Academic Journal Free-Access Links</a></li>
-                    <li><a href="#">&bull; Open Source Contribution Guides</a></li>
-                </ul>
             </div>
 
-            <div class="sidebar-block Newsletter">
+            <div class="news-grid">
+                <section id="world" class="news-section">
+                    <div class="section-header">
+                        <h2>Language & Global Affairs</h2>
+                        <span class="section-indicator"></span>
+                    </div>
+                    <hr class="section-divider">
+                    <div id="world-news-container" class="articles-list">
+                        <p class="loading-state">Loading today's world news...</p>
+                    </div>
+                </section>
+
+                <section id="tech" class="news-section">
+                    <div class="section-header">
+                        <h2>Technology & Innovations</h2>
+                        <span class="section-indicator"></span>
+                    </div>
+                    <hr class="section-divider">
+                    <div id="tech-news-container" class="articles-list">
+                        <p class="loading-state">Loading today's tech breakthroughs...</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Right sidebar area -->
+        <aside id="sidebar-panel" class="sidebar">
+            
+            <!-- Weather / Atmosphere Widget -->
+            <div class="sidebar-block weather-widget" id="weather-widget-block">
+                <div class="widget-header">
+                    <h4>Campus Atmosphere</h4>
+                    <span class="live-dot pulse"></span>
+                </div>
+                <div class="weather-content" id="weather-content-area">
+                    <div class="weather-main">
+                        <span class="weather-temp" id="weather-temp">--°C</span>
+                        <div class="weather-icon-wrapper" id="weather-icon-container">
+                            <!-- SVG weather icon loaded dynamically -->
+                        </div>
+                    </div>
+                    <p class="weather-desc" id="weather-description">Detecting local weather...</p>
+                    <div class="city-selector-wrapper">
+                        <select id="weather-city-select" class="city-select">
+                            <option value="London">London, UK</option>
+                            <option value="New York">New York, USA</option>
+                            <option value="Tokyo">Tokyo, JPN</option>
+                            <option value="Bangalore" selected>Bangalore, IND</option>
+                            <option value="Sydney">Sydney, AUS</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Saved Articles List (Bookmarked) -->
+            <div class="sidebar-block saved-articles-block" id="bookmarks-sidebar-block">
+                <h3>Saved Articles</h3>
+                <div class="saved-articles-container" id="saved-articles-list">
+                    <p class="empty-saved-msg" id="empty-saved-message">No articles bookmarked yet. Click articles and bookmark them to read later!</p>
+                </div>
+            </div>
+
+            <!-- Student Resource Hub (Accordion styled) -->
+            <div class="sidebar-block resources-hub-block" id="resources-hub-block">
+                <h3>Student Resource Hub</h3>
+                <div class="resources-accordion">
+                    <div class="accordion-item" id="accordion-competitions">
+                        <button class="accordion-header" id="btn-accordion-comp">🚀 Hackathons & Contests</button>
+                        <div class="accordion-body">
+                            <ul class="resource-links">
+                                <li><a href="https://devpost.com" target="_blank" id="link-devpost">&bull; Devpost Global Hackathons (2026)</a></li>
+                                <li><a href="https://codeforces.com" target="_blank" id="link-codeforces">&bull; Codeforces Competitive Coding</a></li>
+                                <li><a href="https://github.com" target="_blank" id="link-gh-explore">&bull; GitHub Student Dev Pack</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="accordion-item" id="accordion-journals">
+                        <button class="accordion-header" id="btn-accordion-journ">📚 Academic Journal Portals</button>
+                        <div class="accordion-body">
+                            <ul class="resource-links">
+                                <li><a href="https://scholar.google.com" target="_blank" id="link-gscholar">&bull; Google Scholar Open Directory</a></li>
+                                <li><a href="https://arxiv.org" target="_blank" id="link-arxiv">&bull; arXiv.org CS & Physics Papers</a></li>
+                                <li><a href="https://scihub.org" target="_blank" id="link-scihub">&bull; Academic Journal Search Guides</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="accordion-item" id="accordion-guide">
+                        <button class="accordion-header" id="btn-accordion-guide">💡 Open Source Guides</button>
+                        <div class="accordion-body">
+                            <ul class="resource-links">
+                                <li><a href="https://firstcontributions.github.io" target="_blank" id="link-first-contrib">&bull; First Contributions Walkthrough</a></li>
+                                <li><a href="https://up-for-grabs.net" target="_blank" id="link-up-grabs">&bull; Up-For-Grabs Beginners List</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weekly briefing subscription form -->
+            <div class="sidebar-block newsletter-block" id="newsletter-sidebar-block">
                 <h3>Weekly Briefing</h3>
-                <p>Get a highly curated, jargon-free summary of global events and tech notes delivered straight to your
-                    inbox.</p>
-                <input type="email" placeholder="Enter your student email">
-                <button class="btn-subscribe">Subscribe</button>
+                <p>Get a highly curated, jargon-free summary of global events and tech notes delivered straight to your inbox.</p>
+                <div id="newsletter-form-container">
+                    <input type="email" id="subscriber-email" placeholder="Enter your student email" required>
+                    <button class="btn-subscribe" id="btn-newsletter-subscribe">Subscribe</button>
+                </div>
+                <div id="newsletter-success-msg" class="hidden">
+                    <div class="success-icon">🎉</div>
+                    <p><strong>Subscribed!</strong> Check your inbox soon for your first curated briefing.</p>
+                </div>
             </div>
         </aside>
 
     </main>
+
+    <!-- Dynamic News Reader Modal -->
+    <div id="news-reader-modal" class="modal-overlay hidden">
+        <div class="modal-card" id="modal-card-element">
+            <div class="modal-header">
+                <span class="modal-article-tag" id="modal-tag">World</span>
+                <button class="close-modal-btn" id="close-modal-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h2 id="modal-title">Article Headline Goes Here</h2>
+                <div class="modal-meta-row">
+                    <span class="modal-source" id="modal-source">Source Name</span>
+                    <span class="modal-date" id="modal-date">May 26, 2026</span>
+                </div>
+                <div class="modal-controls">
+                    <!-- Text to speech controller -->
+                    <div class="tts-controls">
+                        <button class="modal-control-btn" id="btn-tts-listen" title="Listen to Article">🔊 Listen</button>
+                        <button class="modal-control-btn hidden" id="btn-tts-pause" title="Pause">⏸️ Pause</button>
+                        <button class="modal-control-btn hidden" id="btn-tts-stop" title="Stop">⏹️ Stop</button>
+                    </div>
+                    <!-- Font controls -->
+                    <div class="font-controls">
+                        <button class="modal-control-btn" id="btn-font-decrease" title="Decrease Text Size">A-</button>
+                        <button class="modal-control-btn" id="btn-font-increase" title="Increase Text Size">A+</button>
+                    </div>
+                    <!-- Interaction actions -->
+                    <div class="action-controls">
+                        <button class="modal-control-btn" id="btn-modal-bookmark" title="Bookmark Article">🔖 Bookmark</button>
+                        <button class="modal-control-btn" id="btn-modal-share" title="Copy Link to Share">🔗 Share</button>
+                    </div>
+                </div>
+                <div class="modal-image-wrapper" id="modal-image-wrapper">
+                    <img id="modal-image" src="" alt="Article image banner">
+                </div>
+                <div class="modal-content-text" id="modal-content-text">
+                    Article body paragraph content goes here...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toast-container"></div>
 
     <footer>
         <p>&copy; 2026 EduPulse News. Designed for curious minds.</p>
